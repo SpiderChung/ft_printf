@@ -14,13 +14,6 @@ void	ft_bzero(void *src, size_t len)
 	}
 }
 
-int	ft_tolower(int c)
-{
-	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
-	return (c);
-}
-
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
@@ -44,25 +37,28 @@ char	*ft_strchr(const char *s, char c)
 	return (r + i);
 }
 
-void	ft_putnbr_throwaway(int n)
+int	ft_putnbr_throwaway(int n, int *rez)
 {
 	if (n == -2147483648)
-		write(1, "-2147483648", 11);
+		*rez += write(1, "-2147483648", 11);
 	else
-		write(1, "0", 1);
+		*rez += write(1, "0", 1);
+	return (*rez);
 }
 
-void	ft_putnbr(int n)
+int	ft_putnbr(int n)
 {
-	char	dst[10];
+	char	dst[20];
 	int		i;
+	int 	rez;
 
 	i = 0;
+	rez = 0;
 	if ((n == -2147483648) || (n == 0))
-		return (ft_putnbr_throwaway(n));
+		return (ft_putnbr_throwaway(n, &rez));
 	if (n < 0)
 	{
-		write(1, "-", 1);
+		rez += write(1, "-", 1);
 		n = n * (-1);
 	}
 	while (n)
@@ -73,5 +69,6 @@ void	ft_putnbr(int n)
 	}
 	i--;
 	while (i >= 0)
-		write(1, &dst[i--], 1);
+		rez += write(1, &dst[i--], 1);
+	return (rez);
 }

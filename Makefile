@@ -14,9 +14,7 @@ NAME = libftprintf.a
 
 HEAD = ft_printf.h
 
-SRC = ft_printf.c
-
-SRC_BONUS = ft_
+SRC = ft_printf.c ft_printf_utils.c ft_printer_utils.c
 
 OBJ = ${SRC:.c=.o}
 
@@ -35,9 +33,9 @@ REMOVE = rm -f
 all: $(NAME)
 
 $(NAME): $(SRC) $(HEAD)   
-	@$(CC) $(SRC)
-	@$(LIB) $(OBJ)
-	@$(RANLIB)
+	$(CC) $(SRC)
+	$(LIB) $(OBJ)
+	$(RANLIB)
 	@echo "[INFO] Library [$(NAME)] created"
 
 bonus:
