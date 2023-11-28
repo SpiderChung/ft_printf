@@ -1,2 +1,2 @@
 # ft_printf
-ft_printf by schung
+Write a function which behavour is like a printf function in C
